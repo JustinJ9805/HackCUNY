@@ -43,6 +43,9 @@ INSTALLED_APPS = [
 
     # Internal Apps
     'job_posting',
+    'user_authentication',
+    'application',
+    'core_api',
 ]
 
 MIDDLEWARE = [
