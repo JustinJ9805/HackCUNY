@@ -136,32 +136,25 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-]
-
 OAUTH2_PROVIDER = {
     'SCOPES': {
         'read': 'Read scope',
-        'write': 'Write scioe',
+        'write': 'Write Scope',
         'groups': 'Access to your groups'
     },
-    'DEFAULT_SCOPES': [
-        'read',
-        'write',
-    ]
-
 }
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
     ],
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
-    )
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
 }
 
 LOGIN_URL = '/admin/login/'
 
-AUTH_APPLICATION_MODEL = 'user_authentication.HackCUNYApplication'
+AUTH_APPLICATION_MODEL = 'core_api.HackathonApplication'
+
+CORS_ORIGIN_ALLOW_ALL = True

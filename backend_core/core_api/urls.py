@@ -8,10 +8,11 @@ router.register(r'posting', PostingViewSet)
 router.register(r'website', WebsiteViewSet)
 router.register(r'experience', ExperienceViewSet)
 router.register(r'skills', SkillViewSet)
+router.register(r'blurb', BlurbViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
     path('users/', UserList.as_view()),
-    path('users/<int:pk>/', UserDetails.as_view()),
-    path('groups/', GroupList.as_view()),
+    path('users/<pk>/', UserDetails.as_view()),
+    path('groups/', GroupList.as_view())
 ]

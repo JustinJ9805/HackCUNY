@@ -31,17 +31,7 @@ class CustomUserSerializer(ModelSerializer):
             'first_name',
             'last_name',
             'email',
-            'password',
             'role'
-        ]
-
-
-class CustomUserLoginSerializer(ModelSerializer):
-    class Meta:
-        model = CustomUser
-        fields = [
-            'username',
-            'password'
         ]
 
 
