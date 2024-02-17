@@ -40,10 +40,11 @@ INSTALLED_APPS = [
     # External Modules
     'rest_framework',
     'corsheaders',
+    'oauth2_provider',
 
     # Internal Apps
     'job_posting',
-    'user_authentication',
+    'user_authentication.apps.UserAuthenticationConfig',
     'application',
     'core_api',
 ]
@@ -134,3 +135,26 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+OAUTH2_PROVIDER = {
+    'SCOPES': {
+        'read': 'Read scope',
+        'write': 'Write Scope',
+        'groups': 'Access to your groups'
+    },
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+
+LOGIN_URL = '/admin/login/'
+
+AUTH_APPLICATION_MODEL = 'core_api.HackathonApplication'
+
+CORS_ORIGIN_ALLOW_ALL = True

@@ -1,3 +1,6 @@
 from django.db import models
+from oauth2_provider.models import AbstractApplication
 
-# Create your models here.
+
+class HackathonApplication(AbstractApplication):
+    pass

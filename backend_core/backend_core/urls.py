@@ -17,7 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+admin.autodiscover()
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('core_api.urls'))
+    path('api/', include('core_api.urls')),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
