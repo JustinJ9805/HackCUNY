@@ -7,9 +7,11 @@ router.register(r'applications', ApplicationViewSet)
 router.register(r'posting', PostingViewSet)
 router.register(r'website', WebsiteViewSet)
 router.register(r'experience', ExperienceViewSet)
-router.register(r'users', CustomUserViewSet)
 router.register(r'skills', SkillViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('users/', UserList.as_view()),
+    path('users/<int:pk>/', UserDetails.as_view()),
+    path('groups/', GroupList.as_view()),
 ]
