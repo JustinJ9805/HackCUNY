@@ -5,7 +5,7 @@ import { Link} from 'react-router-dom';
 
 let testPost  = {
   title: 'test',
-  description: 'testing this out'
+  description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio vero fugit molestias, autem, veritatis consequuntur quidem officia eum est quos corrupti cupiditate quod nam tenetur! Reprehenderit, esse qui? Praesentium, est.'
 }
 
 const Jobs: React.FC = () => {
@@ -59,8 +59,8 @@ const Jobs: React.FC = () => {
             )
           })}
         <div className='my-2 mx-4 p-4 bg-slate-700 rounded-lg w-full'>
-          <h1 className='text-white'>Title</h1>
-          <p className='text-white'>Description</p>
+          <h1 className='text-white'>{testPost.title}</h1>
+          <p className='text-white'>{testPost.description}</p>
           <Link to={{ pathname: '/createApplication', search: `?title=${testPost.title}&description=${testPost.description}` }}>
             <button className='bg-blue-500 text-white p-1 px-6 rounded-lg'>Apply</button>
           </Link>
