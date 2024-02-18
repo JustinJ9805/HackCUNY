@@ -2,7 +2,7 @@ import React from 'react'
 import { GoogleLogin } from 'react-google-login'
 
 
-const signIn = () => {
+const SignIn = () => {
   const responseGoogle = (response: any) => {
     console.log(response)
   }
@@ -30,4 +30,4 @@ const signIn = () => {
   );
 }
 
-export default signIn
+export default SignIn

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const home = () => {
+const Home = () => {
   return (
     //create 2 columns the first should be smaller than the 2nd
     <div className='grid grid-cols-4 gap-4 pt-2 mx-4 my-2'>
@@ -28,4 +28,4 @@ const home = () => {
   )
 }
 
-export default home
+export default Home
