@@ -37,16 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Internal Apps
+    'core_api',
+
     # External Modules
     'rest_framework',
     'corsheaders',
     'oauth2_provider',
+    'rest_framework.authtoken',
 
-    # Internal Apps
-    'job_posting',
-    'user_authentication.apps.UserAuthenticationConfig',
-    'application',
-    'core_api',
+
 ]
 
 MIDDLEWARE = [
@@ -111,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Use Custom User
-AUTH_USER_MODEL = 'user_authentication.CustomUser'
+AUTH_USER_MODEL = 'core_api.CustomUser'
 
 
 # Internationalization
@@ -150,6 +151,8 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'rest_framework.permissions.AllowAny',
     ]
 }
 

@@ -1,44 +1,10 @@
 from rest_framework.serializers import ModelSerializer
-from django.contrib.auth.models import Group
-from application.models import Application
-from job_posting.models import Posting, Skill
-from user_authentication.models import CustomUser, Website, Experience, Blurb
-
-
-class ApplicationSerializer(ModelSerializer):
-    class Meta:
-        model = Application
-        fields = '__all__'
-
-
-class PostingSerializer(ModelSerializer):
-    class Meta:
-        model = Posting
-        fields = '__all__'
-
+from .models import *
 
 class SkillSerializer(ModelSerializer):
     class Meta:
         model = Skill
         fields = '__all__'
-
-
-class CustomUserSerializer(ModelSerializer):
-    class Meta:
-        model = CustomUser
-        fields = [
-            'username',
-            'first_name',
-            'last_name',
-            'email',
-            'role'
-        ]
-
-
-class GroupSerializer(ModelSerializer):
-    class Meta:
-        model = Group
-        fields = ["name", ]
 
 
 class ExperienceSerializer(ModelSerializer):
@@ -53,7 +19,57 @@ class WebsiteSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class BlurbSerializer(ModelSerializer):
+class CustomUserSerializer(ModelSerializer):
     class Meta:
-        model = Blurb
+        model = CustomUser
+        fields = [
+            'email',
+            'user_name',
+            'first_name',
+            'last_name',
+            'password'
+        ]
+
+        extra_kwargs = {
+            'password': {
+                'write_only': True
+            }
+        }
+
+    def create(self, validated_data):
+        password = validated_data.pop('password', None)
+        instance = self.Meta.model(**validated_data)
+        if password is not None:
+            instance.set_password(password)
+        instance.save()
+        return instance
+
+
+class ApplicantSerializer(ModelSerializer):
+    class Meta:
+        model = Applicant
+        fields = '__all__'
+
+
+class BusinessSerializer(ModelSerializer):
+    class Meta:
+        model = Business
+        fields = '__all__'
+
+
+class JobPostingSerializer(ModelSerializer):
+    class Meta:
+        model = JobPosting
+        fields = '__all__'
+
+
+class JobApplicationSerializer(ModelSerializer):
+    class Meta:
+        model = JobApplication
+        fields = '__all__'
+
+
+class ApplicantSkillSerializer(ModelSerializer):
+    class Meta:
+        model = ApplicantSkill
         fields = '__all__'
