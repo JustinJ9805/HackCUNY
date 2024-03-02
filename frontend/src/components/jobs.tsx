@@ -1,74 +1,45 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { Link} from 'react-router-dom';
-
-let testPost  = {
-  title: 'test',
-  description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio vero fugit molestias, autem, veritatis consequuntur quidem officia eum est quos corrupti cupiditate quod nam tenetur! Reprehenderit, esse qui? Praesentium, est.'
-}
+import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Jobs: React.FC = () => {
-  const [posts, setPosts] = useState<any[]>([]);
+  const [listings, setListings] = useState<any[]>([]);
 
   useEffect(() => {
-    const getPosts = async () => {
-      try{
-        const response = await axios.get('http://localhost:5000/api/posts');
-        setPosts(response.data);
+    const getListings = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/listings');
+        console.log('Response data:', response.data);
+        setListings(response.data);
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching data:', error);
       }
-    }
-    getPosts();
-  }
-  , []);
+    };
+    getListings();
+  }, []);
 
-  console.log(posts);
-  
   return (
     <div className='pt-2 mx-4 my-2'>
-      <div className='flex justify-around'>
-        <div className='flex justify-center items-center'>
-          <input type='text' className='border-2 bg-gray-600 border-gray-300 p-2 px-4 rounded-lg text-white' placeholder='Search' />
-        </div>
-        <div className='flex justify-center items-center'>
-          <div className='mx-2'>
-            <select className='border-2 bg-gray-400 border-gray-300 p-2 rounded-lg'>
-              <option value=''>Type</option>
-            </select>
-          </div>
-          <div className='mx-2'>
-            <select className='border-2 bg-gray-400 border-gray-300 p-2 rounded-lg'>
-              <option value=''>Type</option>
-            </select>
-          </div>
-          <button className='bg-blue-500 text-white p-1 px-6 rounded-lg ml-2'>Search</button>
-          </div>
-          </div>
-          <div className='p-8 py-2 bg-slate-800 rounded-lg mt-2'>
-          {posts.map((post: any, index) => {
+      {listings.length === 0 ? (
+        <div>No listings available</div>
+      ) : (
+        <div>
+          {listings.map((listing: any, index:any) => {
             return (
               <div key={index} className='my-2 mx-4 p-4 bg-slate-700 rounded-lg w-full'>
-                <h1 className='text-white'>{post.title}</h1>
-                <p className='text-white'>{post.description}</p>
-                <Link to={{ pathname: '/createApplication', search: `?title=${post.title}&description=${post.description}` }}>
+                <h1 className='text-white'>{listing.title}</h1>
+                <h3>{listing.subtitle}</h3>
+                <p className='text-white'>{listing.description}</p>
+                <Link to={{ pathname: '/createApplication', search: `?title=${listing.title}&description=${listing.description}` }}>
             <button className='bg-blue-500 text-white p-1 px-6 rounded-lg'>Apply</button>
           </Link>
               </div>
             )
-          })}
-        <div className='my-2 mx-4 p-4 bg-slate-700 rounded-lg w-full'>
-          <h1 className='text-white'>{testPost.title}</h1>
-          <p className='text-white'>{testPost.description}</p>
-          <Link to={{ pathname: '/createApplication', search: `?title=${testPost.title}&description=${testPost.description}` }}>
-            <button className='bg-blue-500 text-white p-1 px-6 rounded-lg'>Apply</button>
-          </Link>
+          })}        
         </div>
-        
-      </div>
-  </div>
-  )
-}
+      )}
+    </div>
+  );
+};
 
-export default Jobs
+export default Jobs;
