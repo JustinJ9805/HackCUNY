@@ -31,8 +31,8 @@ const Jobs: React.FC = () => {
                 <h3>{listing.subtitle}</h3>
                 <p className='text-white'>{listing.description}</p>
                 <Link to={{ pathname: '/createApplication', search: `?title=${listing.title}&description=${listing.description}` }}>
-            <button className='bg-blue-500 text-white p-1 px-6 rounded-lg'>Apply</button>
-          </Link>
+                  <button className='bg-blue-500 text-white p-1 px-6 rounded-lg'>Apply</button>
+                </Link>
               </div>
             )
           })}        
