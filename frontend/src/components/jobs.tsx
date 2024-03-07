@@ -20,9 +20,6 @@ const Jobs: React.FC = () => {
 
   return (
     <div className='pt-2 mx-4 my-2'>
-      {listings.length === 0 ? (
-        <div>No listings available</div>
-      ) : (
         <div>
           {listings.map((listing: any, index:any) => {
             return (
@@ -30,14 +27,20 @@ const Jobs: React.FC = () => {
                 <h1 className='text-white'>{listing.title}</h1>
                 <h3>{listing.subtitle}</h3>
                 <p className='text-white'>{listing.description}</p>
+                <div className="flex">
+                  {listing.tags.split(',').map((tag: string, index: number) => {
+                    return (
+                      <p key={index} className='text-white bg-slate-600 px-4 mx-1 rounded-xl'>{tag}</p>
+                    )
+                  })}
+                </div>
                 <Link to={{ pathname: '/createApplication', search: `?title=${listing.title}&description=${listing.description}` }}>
-                  <button className='bg-blue-500 text-white p-1 px-6 rounded-lg'>Apply</button>
+                  <button className='bg-blue-500 text-white p-1 px-6 mt-2 rounded-lg'>More Info</button>
                 </Link>
               </div>
             )
           })}        
         </div>
-      )}
     </div>
   );
 };
