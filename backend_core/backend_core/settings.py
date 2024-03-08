@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     # External Modules
     'rest_framework',
     'corsheaders',
-    'oauth2_provider',
     'rest_framework.authtoken',
 
 
@@ -146,18 +145,11 @@ OAUTH2_PROVIDER = {
 }
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-        'rest_framework.permissions.AllowAny',
-    ]
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
+    )
 }
 
-LOGIN_URL = '/admin/login/'
-
-AUTH_APPLICATION_MODEL = 'core_api.HackathonApplication'
+AUTH_USER_MODEL = "core_api.NewUser"
 
 CORS_ORIGIN_ALLOW_ALL = True
