@@ -1,8 +1,11 @@
 import React from 'react'
 
-const Home = () => {
+interface HomePageProps {
+  columnStatus : boolean
+}
+const Home: React.FC<HomePageProps> = ({columnStatus}) => {
   return (
-    <div className='grid grid-cols-4 gap-4 pt-2 mx-4 my-2'>
+    <div className={columnStatus ? 'shrink grid grid-cols-4 gap-4 pt-2 mx-4 my-2': 'grid grid-cols-4 gap-4 pt-2 mx-4 my-2'}>
       <div className='border-r-2 px-4'>
         <div className='col-span-1 bg-slate-800 rounded-lg px-4 py-2 '>
           <div>
