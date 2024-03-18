@@ -10,6 +10,7 @@ import SignUp from './components/signUp';
 import CreateApplication from './components/createApplication';
 import CreatePost from './components/createPost';
 import RightSideMenu from './shared/rightSideMenu';
+import Footer from './shared/footer';
 
 function App() {
   const [column, setColumn] = useState(false);
@@ -38,7 +39,7 @@ function App() {
           <Route path="/createPost" element={<CreatePost/>} />
         </Routes>
       </div>
-      {/* footer */}
+      <Footer />
     </BrowserRouter>
   );
 }
