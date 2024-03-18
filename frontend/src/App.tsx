@@ -26,7 +26,7 @@ function App() {
     <BrowserRouter>
       <Nav toggleColumn={toggleColumn}/>
       <RightSideMenu hidden={!column}/>
-      <div className={`transition-all duration-500 ease-in-out ${column ? 'w-3/4' : 'w-full'}`}>
+      <div className={`transition-all duration-500 ease-in-out ${column ? 'w-3/4' :'w-full'}`}>
         <Routes>
           <Route path="/" element={<Home columnStatus={column} />} />
           <Route path="/profile" element={<Profile />} />
