@@ -1,48 +1,79 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import DensityMediumIcon from '@mui/icons-material/DensityMedium';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
+import {BellIcon, Bars4Icon} from '@heroicons/react/24/outline'
 interface NavbarProps {
   toggleColumn: () => void;
 }
+
 const navigation = [
-  { name: 'Home', href: '/',  current: true },
-  { name: 'Profile', href: '/profile',  current: false },
+  { name: 'Products & Services', href: '',  current: false },
+  { name: 'Services', href: '',  current: false },
   { name: 'Jobs', href: '/jobs', current: false },
 ]
+const ProductsServicesMenu = [
+  { name: 'Resume.Ai', href: '/resume' },
+  { name: 'CoverLetter.Ai', href: '/coverLetter' },
+]
+
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
+
 const Navbar: React.FC<NavbarProps> = ({ toggleColumn }) => {
-  const [active, setActive] = useState('home')
-  const [hover, setHover] = useState('')
+  const [column, setColumn] = useState(false);
+  const [itemHover, setItemHover] = useState('');
+
   return (
-    <div className='flex'>
+    <div className='sticky top-0 z-10 border-b-2 shadow-md rounded-none px-4 bg-white'>
       <nav className='flex pb-2 pt-1 w-full justify-between'>
-        <div className='flex justify-center align-center mx-4 mt-1 '>
-          <img src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500' alt='logo' className='rounded-full' />
-          <ul className='flex'>
-            {navigation.map((item) => (
-              <li key={item.name} onMouseEnter={() => setHover(item.name)} onMouseLeave={() => setHover('')} className={hover === item.name ? 'bg-gray-200 px-4 rounded-lg':'px-4'}>
-                <Link to={item.href} onClick={() => setActive(item.name)} className={active === item.name ? 'text-purple-400' : 'text-gray-400'}>
-                  <span>{item.name}</span>
-                </Link>
-              </li>
-            ))}
+        <div className='flex justify-center align-center mx-8 mt-1 '>
+          <Link to="/">
+            <button>
+              <img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="logo" className='h-8 w-8'/>
+            </button>
+          </Link>
+          <ul className='flex items-center ml-4'>
+          {navigation.map((item) => (
+            <li key={item.name} className='hover:bg-gray-200 px-4 rounded-lg relative'
+            onMouseEnter={() => {
+              setItemHover(item.name);
+              }}
+              onMouseLeave={() => {setItemHover('')}}>
+              <Link to={item.href} onClick={(e) => {
+                if(item.name === 'Products & Services') {
+                  e.preventDefault();
+                }
+              } } className='text-gray-400'>
+                <span>{item.name}</span>
+              </Link>
+              {itemHover === item.name && item.name === 'Products & Services' && (
+                <ul className='absolute top-6 left-0 bg-white rounded-lg shadow-lg border-gray-200 border-2 w-60'>
+                  {ProductsServicesMenu.map((item) => (
+                    <li key={item.name} className='hover:bg-gray-200 px-4 py-1'>
+                      <Link to={item.href} className='text-gray-400'>
+                        <span>{item.name}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
           </ul>
         </div>
         <div className='flex items-center'>
           <ul className='flex pr-8'>
-            <li className='ml-2'>
+            <li className='bg-blue-400 rounded-lg text-white hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
               <Link to="/signIn">
-                <button className='rounded-lg px-4 text-gray-200 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 '>Sign In</button>
+                <button className=' px-4  text-lg'>Sign In</button>
               </Link>
             </li>
           </ul>
-          <button className='flex mx-2'>
-            <NotificationsIcon className='text-2xl'/>
+          <button className='flex mx-2 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
+            <BellIcon className='h-5 w-5' aria-hidden="true"/>
           </button>
           <Menu as="div" className="relative ml-3">
             <div>
@@ -69,7 +100,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleColumn }) => {
                 <Menu.Item>
                   {({ active }) => (
                     <a
-                      href="#"
+                      href="/profile"
                       className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                     >
                       Your Profile
@@ -99,8 +130,8 @@ const Navbar: React.FC<NavbarProps> = ({ toggleColumn }) => {
               </Menu.Items>
             </Transition>
           </Menu>
-          <button className='flex'>
-            <DensityMediumIcon onClick={toggleColumn} className='text-2xl'/>
+          <button onClick={() => setColumn(!column) } className={`flex ml-3 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 ${column ? 'text-blue-400' : ''} `}>
+            <Bars4Icon className='h-5 w-5' aria-hidden="true" onClick={toggleColumn}/>
           </button>
         </div>
         
