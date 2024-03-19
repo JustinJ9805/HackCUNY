@@ -38,8 +38,8 @@ function App() {
           <Route path="/signUp" element={<SignUp/>} />
           <Route path="/createApplication" element={<CreateApplication/>} />
           <Route path="/createPost" element={<CreatePost/>} />
-          <Route path="coverLetter" element={<CoverLetter/>} />
-          <Route path="resume" element={<Resume/>} />
+          <Route path="/coverLetter" element={<CoverLetter/>} />
+          <Route path="/resume" element={<Resume/>} />
         </Routes>
       </div>
       <Footer />

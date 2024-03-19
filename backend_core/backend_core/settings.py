@@ -40,11 +40,14 @@ INSTALLED_APPS = [
 
     # Internal Apps
     'core_api',
+    'users',
 
     # External Modules
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',
+    'phonenumber_field',
+    'localflavor',
 
 
 ]
@@ -111,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Use Custom User
-AUTH_USER_MODEL = 'core_api.CustomUser'
+AUTH_USER_MODEL = 'users.NewUser'
 
 
 # Internationalization
@@ -149,7 +152,5 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication'
     )
 }
-
-AUTH_USER_MODEL = "core_api.NewUser"
 
 CORS_ORIGIN_ALLOW_ALL = True
