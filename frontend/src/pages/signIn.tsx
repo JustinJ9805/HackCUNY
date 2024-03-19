@@ -1,12 +1,9 @@
-import React from 'react'
-import { GoogleLogin } from 'react-google-login'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+
 const SignIn = () => {
-  const responseGoogle = (response: any) => {
-    console.log(response)
-  }
-  return (
+    return (
     <div className='flex justify-center items-center h-screen'>
       <div className='p-8 bg-slate-800 rounded-lg'>
         <h1 className='text-4xl font-bold text-white flex justify-center'>Sign In</h1>
@@ -17,15 +14,6 @@ const SignIn = () => {
           {/* link to signup */}
         </div>
 
-        <div className='flex justify-center'>
-          <GoogleLogin
-            clientId="YOUR_CLIENT_ID.apps.googleusercontent.com"
-            buttonText="Login with Google"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={'single_host_origin'}
-          />
-        </div>
         <div className='mt-8'>
           <Link to='/signUp'>
             <p className='text-white text-center'>Dont have an account?
