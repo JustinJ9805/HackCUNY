@@ -2,22 +2,24 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
-import {BellIcon, Bars4Icon} from '@heroicons/react/24/outline'
+import {BellIcon, BellAlertIcon} from '@heroicons/react/24/outline'
 interface NavbarProps {
   toggleColumn: () => void;
 }
 
 const navigation = [
   { name: 'Products & Services', href: '',  current: false },
-  { name: 'Services', href: '',  current: false },
+  { name: 'Tools', href: '',  current: false },
   { name: 'Jobs', href: '/jobs', current: false },
 ]
 const ProductsServicesMenu = [
-  { name: 'Resume.Ai', href: '/resume' },
-  { name: 'CoverLetter.Ai', href: '/coverLetter' },
+  { name: 'Resume Builder', href: '/resume' },
+  { name: 'Cover Letter Generation', href: '/coverLetter' },
 ]
-
-
+const ToolsMenu = [
+  { name: 'Resume.Ai', href: '/resumeTool' },
+  { name: 'CoverLetter.Ai', href: '/coverLetterTool' },
+]
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
@@ -25,7 +27,8 @@ function classNames(...classes: string[]) {
 const Navbar: React.FC<NavbarProps> = ({ toggleColumn }) => {
   const [column, setColumn] = useState(false);
   const [itemHover, setItemHover] = useState('');
-
+  //unused currently
+  const [notifications, setNotifications] = useState();
   return (
     <div className='sticky top-0 z-10 border-b-2 shadow-md rounded-none px-4 bg-white'>
       <nav className='flex pb-2 pt-1 w-full justify-between'>
@@ -60,6 +63,17 @@ const Navbar: React.FC<NavbarProps> = ({ toggleColumn }) => {
                   ))}
                 </ul>
               )}
+              {itemHover === item.name && item.name === 'Tools' && (
+                <ul className='absolute top-6 left-0 bg-white rounded-lg shadow-lg border-gray-200 border-2 w-60'>
+                  {ToolsMenu.map((item) => (
+                    <li key={item.name} className='hover:bg-gray-200 px-4 py-1'>
+                      <Link to={item.href} className='text-gray-400'>
+                        <span>{item.name}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
           </ul>
@@ -72,9 +86,9 @@ const Navbar: React.FC<NavbarProps> = ({ toggleColumn }) => {
               </Link>
             </li>
           </ul>
-          <button className='flex mx-2 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
+          {/* <button className='flex mx-2 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
             <BellIcon className='h-5 w-5' aria-hidden="true"/>
-          </button>
+          </button> */}
           <Menu as="div" className="relative ml-3">
             <div>
               <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -130,8 +144,9 @@ const Navbar: React.FC<NavbarProps> = ({ toggleColumn }) => {
               </Menu.Items>
             </Transition>
           </Menu>
-          <button onClick={() => setColumn(!column) } className={`flex ml-3 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 ${column ? 'text-blue-400' : ''} `}>
-            <Bars4Icon className='h-5 w-5' aria-hidden="true" onClick={toggleColumn}/>
+          <button onClick={() => setColumn(!column) } className={`flex ml-6 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 ${column ? 'text-blue-400' : ''} `}>
+            {/* <Bars4Icon className='h-5 w-5' aria-hidden="true" onClick={toggleColumn}/> */}
+            {notifications && <BellAlertIcon className='h-5 w-5' aria-hidden="true" onClick={toggleColumn}/> || !notifications && <BellIcon className='h-5 w-5' aria-hidden="true" onClick={toggleColumn}/> }
           </button>
         </div>
         
