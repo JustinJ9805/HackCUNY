@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, Typography } from "@mui/material";
+import axios from "axios";
 
 const Landing = () => {
     const [tabValue, setTabValue] = useState(0);
@@ -8,8 +9,9 @@ const Landing = () => {
     const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
         setTabValue(newValue);
     };
-
+    
     return (
+        
         <div className='p-8 py-2 bg-slate-800 rounded-lg mt-2 text-center'>
             <div className='my-2 mx-4 p-4 bg-slate-700 rounded-lg'>
                 <div className='text-white' style={{ fontSize: '2rem' }}>Leverage AI for Customized Resumes to <br></br> Match Any Job Listing</div>

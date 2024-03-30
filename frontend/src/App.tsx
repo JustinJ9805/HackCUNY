@@ -14,6 +14,8 @@ import Footer from './shared/footer';
 import Landing from './pages/landingPage';
 import ResumeAiTool from './pages/Tools/resumeAiTool';
 import CoverLetterAiTool from './pages/Tools/coverLetterAiTool';
+import { Provider } from 'react-redux';
+
 function App() {
   const [column, setColumn] = useState(false);
 
@@ -22,7 +24,6 @@ function App() {
     // keep open for testing
     // setColumn(true);
   };
-
 
   return (
     <BrowserRouter>
@@ -34,7 +35,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/jobs" element={<Jobs />} />
           <Route path='/landing' element={<Landing />} />
-          <Route path="/signIn" element={<SignIn/>} />
+          <Route path="/signIn" element={<SignIn />} />
           <Route path="/signUp" element={<SignUp/>} />
           <Route path="/createApplication" element={<CreateApplication/>} />
           <Route path="/createPost" element={<CreatePost/>} />
