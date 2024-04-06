@@ -72,7 +72,31 @@ async function ResumeHandler(req, res) {
       }
 }
 
+async function ProcessTextWithOpenAI(req) {
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "user",
+          content: req.body.message
+        }
+      ],
+      max_tokens: 500
+    });
+    if (!response.choices || response.choices.length === 0) {
+      throw new Error('Unexpected response format');
+    }
+
+    return response.choices[0].message.content; // return the processed text
+  } catch (err) {
+      console.log(err);
+      throw new Error('Failed to process text with OpenAI');
+  }
+}
+
 module.exports = {
     CoverLetter,
-    ResumeHandler
+    ResumeHandler,
+    ProcessTextWithOpenAI
 };

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const pdfParse = require('pdf-parse');
+const { ProcessTextWithOpenAI } = require('./openai');
 
 async function ResumeUpload(req, res) {
     try {
@@ -13,11 +14,10 @@ async function ResumeUpload(req, res) {
             return res.status(400).json({ message: 'Only PDF files are supported.' });
         }
 
-        pdfParse(file.data).then(text => {
-            //replace newlines with line break tags
-            // text = text.text.replace(/\n/g, '<br>');
-            console.log(text);
-            res.send(text);
+        pdfParse(file.data).then(async text => {
+            req.body.message = text.text; // Add this line
+            const processedText = await ProcessTextWithOpenAI(req, res); // Pass res as well
+            res.send({ success: true, data: processedText });
         }).catch(err => {
             console.error(err);
             return res.status(500).json({ message: 'Internal server error' });
@@ -27,6 +27,7 @@ async function ResumeUpload(req, res) {
         res.status(500).json({ message: 'Internal server error' });
     }
 }
+
 
 module.exports = {
     ResumeUpload

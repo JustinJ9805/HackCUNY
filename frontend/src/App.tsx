@@ -11,10 +11,9 @@ import RightSideMenu from './shared/rightSideMenu';
 import CoverLetter from './pages/Products/CoverLetter';
 import Resume from './pages/Products/Resume';
 import Footer from './shared/footer';
-import Landing from './pages/landingPage';
+import Landing from './pages/Landing/landingPage';
 import ResumeAiTool from './pages/Tools/resumeAiTool';
 import CoverLetterAiTool from './pages/Tools/coverLetterAiTool';
-import { Provider } from 'react-redux';
 
 function App() {
   const [column, setColumn] = useState(false);
