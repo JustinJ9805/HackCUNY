@@ -49,8 +49,8 @@ const Navbar: React.FC<NavbarProps> = ({ toggleColumn }) => {
 
   return (
     <div className='sticky top-0 z-10 border-b-2 shadow-md rounded-none px-4 bg-white'>
-      <nav className='flex pb-2 pt-1 w-full justify-between'>
-        <div className='flex justify-center align-center mx-8 mt-1 '>
+      <nav className='flex pt-1 w-full justify-between'>
+        <div className='flex justify-center align-center mx-8 '>
           <Link to="/">
             <button>
               <img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="logo" className='h-8 w-8'/>
@@ -97,17 +97,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleColumn }) => {
           </ul>
         </div>
         <div className='flex items-center'>
-          <ul className='flex pr-8'>
-            
-            <li className='bg-blue-400 rounded-lg text-white hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
-              <Link to="/signIn">
-                <button className=' px-4  text-lg'>Sign In</button>
-              </Link>
-            </li>
-            
-          </ul>
             {accounts.length > 0 ? ( 
-              
             <Menu as="div" className="relative ml-3">
               <div>
                 <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -164,9 +154,11 @@ const Navbar: React.FC<NavbarProps> = ({ toggleColumn }) => {
               </Transition>
             </Menu>
             ) : (
-              <Link to="/signUp">
-                <button className='bg-blue-500 text-white p-1 px-6 rounded-lg my-2 ml'>Sign Up</button>
-              </Link>
+              <div className=''>
+                  <Link to='/signUp'> 
+                      <button className='bg-blue-500 hover:bg-blue-400 text-white p-2 px-4 rounded-3xl my-2 ml text-sm'>SIGN IN</button>
+                  </Link>
+              </div>
             )}
           <button onClick={() => setColumn(!column) } className={`flex ml-6 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 ${column ? 'text-blue-400' : ''} `}>
             {/* <Bars4Icon className='h-5 w-5' aria-hidden="true" onClick={toggleColumn}/> */}
